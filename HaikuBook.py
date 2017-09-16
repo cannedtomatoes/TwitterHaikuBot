@@ -54,7 +54,7 @@ else:
 	word = input
 	word_is_random = False
 
-print("Word selected: ", word, "\n")
+#print("Word selected: ", word, "\n")
 
 sentences = []
 fives = []
@@ -64,7 +64,7 @@ sevens = []
 #   with open('10b.txt'.format(i)) as f:
 #       sentences += re.findall(r".*?[\.\!\?]+", f.read())
 
-print("Extracting sentences from text file")
+#print("Extracting sentences from text file")
 
 f = open('20b.txt', encoding='utf-8')
 sentences += re.findall(r".*?[\.\!\?]+", f.read())
@@ -76,103 +76,121 @@ for sentence in sentences:
 	if CountSyllables(sentence) == 7:
 		sevens.append(sentence)
 		
-print("Number of sentences with five syllables: ", len(fives))
-print("Number of sentences with seven syllables: ", len(sevens))
+#print("Number of sentences with five syllables: ", len(fives))
+#print("Number of sentences with seven syllables: ", len(sevens))
 
-#Sentence 1
-success = False
-count = 0
+wins = 0
+success1 = False
+success2 = False
+success3 = False
 
-while success == False:
+while wins != 3:
 
-	while count < (attempts + 1):
+	#Sentence 1
+
+	count = 0
+	
+	while success1 == False:
+
+		while count < (attempts + 1):
 		
-		s1 = sample(fives, 1)
-		s2 = ''.join(s1)
-		s2 = s2.split()
+			s1 = sample(fives, 1)
+			s2 = ''.join(s1)
+			s2 = s2.split()
 		
-		#print("Attempt ", count)
+			#print("Attempt ", count)
 		
-		if word in s2:
-			success = True
-			print(s1)
-			break
-		else:
-			count += 1
-			#print("Attempt ", count, "failed")
-		
-		if count == attempts:
-			if word_is_random == True:
-				print("Giving up on ", word, ", trying new word: ")
-				word = random.choice(open('20k.txt').readlines())[:-1]
-				print(word, "\n")
-				count = 0
-				
-				
+			if word in s2:
+				success1 = True
+				wins += 1
+				sen1 = s1
+				break
 			else:
-				print("Giving up on", word)
-				sys.exit()
+				count += 1
+				#print("Attempt ", count, "failed")
+		
+			if count == attempts:
+				if word_is_random == True:
+					#print("Giving up on ", word, ", trying new word: ")
+					word = random.choice(open('20k.txt').readlines())[:-1]
+					#print(word, "\n")
+					count = 0
+				
+				
+				else:
+					print("Giving up on", word)
+					sys.exit()
 			
 
-#Sentence 2
-success = False
-count = 0
+	#Sentence 2
 
-while success == False:
+	count = 0
 
-	while count < (attempts + 1):
+	while success2 == False:
+
+		while count < (attempts + 1):
 		
-		s1 = sample(sevens, 1)
-		s2 = ''.join(s1)
-		s2 = s2.split()
+			s1 = sample(sevens, 1)
+			s2 = ''.join(s1)
+			s2 = s2.split()
 		
+			#print("Attempt ", count)
 		
-		if word in s2:
-			success = True
-			print(s1)
-			
-			break
-		else:
-			count += 1
-		
-		if count == attempts:
-			if word_is_random == True:
-				print("Giving up on ", word, ", trying new word: ")
-				word = random.choice(open('20k.txt').readlines())[:-1]
-				print(word, "\n")
-				count = 0
-				
+			if word in s2:
+				success2 = True
+				wins += 1
+				sen2 = s1
+				break
 			else:
-				print("Giving up on", word)
-				sys.exit()
+				count += 1
+				#print("Attempt ", count, "failed")
 		
-#Sentence 3
-success = False
-count = 0
-
-while success == False:
-
-	while count < (attempts + 1):
-		
-		s1 = sample(fives, 1)
-		s2 = ''.join(s1)
-		s2 = s2.split()
-		
-		
-		if word in s2:
-			success = True
-			print(s1)
-			break
-		else:
-			count += 1
-		
-		if count == attempts:
-			if word_is_random == True:
-				print("Giving up on ", word, ", trying new word: ")
-				word = random.choice(open('20k.txt').readlines())[:-1]
-				print(word, "\n")
-				count = 0
+			if count == attempts:
+				if word_is_random == True:
+					#print("Giving up on ", word, ", trying new word: ")
+					word = random.choice(open('20k.txt').readlines())[:-1]
+					#print(word, "\n")
+					count = 0
 				
+				
+				else:
+					print("Giving up on", word)
+					sys.exit()
+		
+	#Sentence 3
+	
+	count = 0
+
+	while success3 == False:
+
+		while count < (attempts + 1):
+		
+			s1 = sample(fives, 1)
+			s2 = ''.join(s1)
+			s2 = s2.split()
+		
+		
+			if word in s2:
+				success3 = True
+				wins += 1
+				sen3 = s1
+				break
 			else:
-				print("Giving up on", word)
-				sys.exit()
+				count += 1
+		
+			if count == attempts:
+				if word_is_random == True:
+					#print("Giving up on ", word, ", trying new word: ")
+					word = random.choice(open('20k.txt').readlines())[:-1]
+					#print(word, "\n")
+					count = 0
+				
+				else:
+					print("Giving up on", word)
+					sys.exit()
+				
+#Print results
+print("\nHaiku completed using seed word", word, "\n")
+print(sen1)
+print(sen2)
+print(sen3)
