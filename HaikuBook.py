@@ -41,9 +41,9 @@ def CountSyllables(word, isName=True):
 #-------------------------
 
 # Start main program
-print "Haiku generator\n"
-print "Input word or type 'random': "
-input = raw_input()
+print("Haiku generator\n")
+print("Input word or type 'random': ")
+input = input()
 
 if input == 'random':
 	word = random.choice(open('20k.txt').readlines())[:-1]
@@ -52,7 +52,7 @@ else:
 	word = input
 	word_is_random = False
 
-print "Word selected: ", word, "\n"
+print("Word selected: ", word, "\n")
 
 sentences = []
 #for i in range(20):
@@ -76,20 +76,20 @@ while success == False:
 		if CountSyllables(temp1) == 5:
 			if word in temp2:
 				success = True
-				print s1
+				print(s1)
 				break
 			else:
 				count += 1
 		
 		if count == 100:
 			if word_is_random == True:
-				print "Giving up on ", word, ", trying new word: "
+				print("Giving up on ", word, ", trying new word: ")
 				word = random.choice(open('20k.txt').readlines())[:-1]
-				print word, "\n"
+				print(word, "\n")
 				counter = 0
 				
 			else:
-				print "Giving up on", word
+				print("Giving up on", word)
 				sys.exit()
 			
 
@@ -107,20 +107,20 @@ while success == False:
 		if CountSyllables(temp1) == 7:
 			if word in temp2:
 				success = True
-				print s1
+				print(s1)
 				break
 			else:
 				count += 1
 				
 		if count == 100:
 			if word_is_random == True:
-				print "Giving up on ", word, ", trying new word: "
+				print("Giving up on ", word, ", trying new word: ")
 				word = random.choice(open('20k.txt').readlines())[:-1]
-				print word, "\n"
+				print(word, "\n")
 				counter = 0
 				
 			else:
-				print "Giving up on", word
+				print("Giving up on", word)
 				sys.exit()
 		
 #Sentence 3
@@ -137,7 +137,7 @@ while success == False:
 		if CountSyllables(temp1) == 5:
 			if word in temp2:
 				success = True
-				print s1
+				print(s1)
 				break
 			else:
 				count += 1
@@ -145,11 +145,11 @@ while success == False:
 				
 		if count == 100:
 			if word_is_random == True:
-				print "Giving up on ", word, ", trying new word: "
+				print("Giving up on ", word, ", trying new word: ")
 				word = random.choice(open('20k.txt').readlines())[:-1]
-				print word, "\n"
+				print(word, "\n")
 				counter = 0
 				
 			else:
-				print "Giving up on", word
+				print("Giving up on", word)
 				sys.exit()
