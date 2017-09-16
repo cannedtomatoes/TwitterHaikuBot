@@ -1,7 +1,7 @@
 import re
 import sys
 from random import sample
-import random
+import random 
 
 #Function to count syllables
 def CountSyllables(word, isName=True):
@@ -41,11 +41,13 @@ def CountSyllables(word, isName=True):
 #-------------------------
 
 # Start main program
+attempts = 4000 # attempts at finding sentence with given word
+
 print("Haiku generator\n")
-print("Input word or type 'random': ")
+print("Input word or type 'r': ")
 input = input()
 
-if input == 'random':
+if input == 'r':
 	word = random.choice(open('20k.txt').readlines())[:-1]
 	word_is_random = True
 else:
@@ -83,12 +85,13 @@ count = 0
 
 while success == False:
 
-	while count < 101:
+	while count < (attempts + 1):
 		
 		s1 = sample(fives, 1)
 		s2 = ''.join(s1)
 		s2 = s2.split()
 		
+		#print("Attempt ", count)
 		
 		if word in s2:
 			success = True
@@ -96,13 +99,15 @@ while success == False:
 			break
 		else:
 			count += 1
+			#print("Attempt ", count, "failed")
 		
-		if count == 100:
+		if count == attempts:
 			if word_is_random == True:
 				print("Giving up on ", word, ", trying new word: ")
 				word = random.choice(open('20k.txt').readlines())[:-1]
 				print(word, "\n")
-				counter = 0
+				count = 0
+				
 				
 			else:
 				print("Giving up on", word)
@@ -115,9 +120,9 @@ count = 0
 
 while success == False:
 
-	while count < 101:
+	while count < (attempts + 1):
 		
-		s1 = sample(fives, 1)
+		s1 = sample(sevens, 1)
 		s2 = ''.join(s1)
 		s2 = s2.split()
 		
@@ -130,12 +135,12 @@ while success == False:
 		else:
 			count += 1
 		
-		if count == 100:
+		if count == attempts:
 			if word_is_random == True:
 				print("Giving up on ", word, ", trying new word: ")
 				word = random.choice(open('20k.txt').readlines())[:-1]
 				print(word, "\n")
-				counter = 0
+				count = 0
 				
 			else:
 				print("Giving up on", word)
@@ -147,7 +152,7 @@ count = 0
 
 while success == False:
 
-	while count < 101:
+	while count < (attempts + 1):
 		
 		s1 = sample(fives, 1)
 		s2 = ''.join(s1)
@@ -161,12 +166,12 @@ while success == False:
 		else:
 			count += 1
 		
-		if count == 100:
+		if count == attempts:
 			if word_is_random == True:
 				print("Giving up on ", word, ", trying new word: ")
 				word = random.choice(open('20k.txt').readlines())[:-1]
 				print(word, "\n")
-				counter = 0
+				count = 0
 				
 			else:
 				print("Giving up on", word)
