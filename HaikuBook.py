@@ -3,6 +3,7 @@ import sys
 from random import sample
 import random
 import syllables_en
+from sentences import split_into_sentences
 
 #Function to count syllables
 def CountSyllables(word, isName=True):
@@ -36,7 +37,7 @@ def main():
 	#print("Extracting sentences from text file")
 
 	f = open('20b.txt', encoding='utf-8')
-	sentences = re.findall(r".*?[\.\!\?]+", f.read())
+	sentences = split_into_sentences(f.read())
 
 	for sentence in sentences:
 		s = ''.join(sentence) #turn sentence into string
