@@ -36,8 +36,8 @@ def main():
 
 	#print("Extracting sentences from text file")
 
-	f = open('20b.txt', encoding='utf-8')
-	sentences = split_into_sentences(f.read())
+	with open('20b.txt', encoding='utf-8') as f:
+		sentences = split_into_sentences(f.read())
 
 	for sentence in sentences:
 		s = ''.join(sentence) #turn sentence into string
