@@ -9,156 +9,160 @@ def CountSyllables(word, isName=True):
 	return syllables_en.count(word)
 
 # Start main program
-attempts = 4000 # attempts at finding sentence with given word
+def main():
+	attempts = 4000 # attempts at finding sentence with given word
 
-print("Haiku generator\n")
-print("Input word or type 'r': ")
-input = input()
+	print("Haiku generator\n")
+	print("Input word or type 'r': ")
+	user_input = input()
 
-if input == 'r':
-	word = random.choice(open('20k.txt').readlines())[:-1]
-	word_is_random = True
-else:
-	word = input
-	word_is_random = False
+	if user_input == 'r':
+		word = random.choice(open('20k.txt').readlines())[:-1]
+		word_is_random = True
+	else:
+		word = input
+		word_is_random = False
 
-#print("Word selected: ", word, "\n")
+	#print("Word selected: ", word, "\n")
 
-sentences = []
-fives = []
-sevens = []
+	#sentences = []
+	fives = []
+	sevens = []
 
-#for i in range(20):
-#   with open('10b.txt'.format(i)) as f:
-#       sentences += re.findall(r".*?[\.\!\?]+", f.read())
+	#for i in range(20):
+	#   with open('10b.txt'.format(i)) as f:
+	#       sentences += re.findall(r".*?[\.\!\?]+", f.read())
 
-#print("Extracting sentences from text file")
+	#print("Extracting sentences from text file")
 
-f = open('20b.txt', encoding='utf-8')
-sentences += re.findall(r".*?[\.\!\?]+", f.read())
+	f = open('20b.txt', encoding='utf-8')
+	sentences = re.findall(r".*?[\.\!\?]+", f.read())
 
-for sentence in sentences:
-	s = ''.join(sentence) #turn sentence into string
-	if CountSyllables(sentence) == 5:
-		fives.append(sentence)
-	if CountSyllables(sentence) == 7:
-		sevens.append(sentence)
-		
-#print("Number of sentences with five syllables: ", len(fives))
-#print("Number of sentences with seven syllables: ", len(sevens))
+	for sentence in sentences:
+		s = ''.join(sentence) #turn sentence into string
+		if CountSyllables(sentence) == 5:
+			fives.append(sentence)
+		if CountSyllables(sentence) == 7:
+			sevens.append(sentence)
 
-wins = 0
-success1 = False
-success2 = False
-success3 = False
+	#print("Number of sentences with five syllables: ", len(fives))
+	#print("Number of sentences with seven syllables: ", len(sevens))
 
-while wins != 3:
+	wins = 0
+	success1 = False
+	success2 = False
+	success3 = False
 
-	#Sentence 1
+	while wins != 3:
 
-	count = 0
-	
-	while success1 == False:
+		#Sentence 1
 
-		while count < (attempts + 1):
-		
-			s1 = sample(fives, 1)
-			s2 = ''.join(s1)
-			s2 = s2.split()
-		
-			#print("Attempt ", count)
-		
-			if word in s2:
-				success1 = True
-				wins += 1
-				sen1 = s1
-				break
-			else:
-				count += 1
-				#print("Attempt ", count, "failed")
-		
-			if count == attempts:
-				if word_is_random == True:
-					#print("Giving up on ", word, ", trying new word: ")
-					word = random.choice(open('20k.txt').readlines())[:-1]
-					#print(word, "\n")
-					count = 0
-				
-				
+		count = 0
+
+		while success1 == False:
+
+			while count < (attempts + 1):
+
+				s1 = sample(fives, 1)
+				s2 = ''.join(s1)
+				s2 = s2.split()
+
+				#print("Attempt ", count)
+
+				if word in s2:
+					success1 = True
+					wins += 1
+					sen1 = s1
+					break
 				else:
-					print("Giving up on", word)
-					sys.exit()
-			
+					count += 1
+					#print("Attempt ", count, "failed")
 
-	#Sentence 2
+				if count == attempts:
+					if word_is_random == True:
+						#print("Giving up on ", word, ", trying new word: ")
+						word = random.choice(open('20k.txt').readlines())[:-1]
+						#print(word, "\n")
+						count = 0
 
-	count = 0
 
-	while success2 == False:
+					else:
+						print("Giving up on", word)
+						sys.exit()
 
-		while count < (attempts + 1):
-		
-			s1 = sample(sevens, 1)
-			s2 = ''.join(s1)
-			s2 = s2.split()
-		
-			#print("Attempt ", count)
-		
-			if word in s2:
-				success2 = True
-				wins += 1
-				sen2 = s1
-				break
-			else:
-				count += 1
-				#print("Attempt ", count, "failed")
-		
-			if count == attempts:
-				if word_is_random == True:
-					#print("Giving up on ", word, ", trying new word: ")
-					word = random.choice(open('20k.txt').readlines())[:-1]
-					#print(word, "\n")
-					count = 0
-				
-				
+
+		#Sentence 2
+
+		count = 0
+
+		while success2 == False:
+
+			while count < (attempts + 1):
+
+				s1 = sample(sevens, 1)
+				s2 = ''.join(s1)
+				s2 = s2.split()
+
+				#print("Attempt ", count)
+
+				if word in s2:
+					success2 = True
+					wins += 1
+					sen2 = s1
+					break
 				else:
-					print("Giving up on", word)
-					sys.exit()
-		
-	#Sentence 3
-	
-	count = 0
+					count += 1
+					#print("Attempt ", count, "failed")
 
-	while success3 == False:
+				if count == attempts:
+					if word_is_random == True:
+						#print("Giving up on ", word, ", trying new word: ")
+						word = random.choice(open('20k.txt').readlines())[:-1]
+						#print(word, "\n")
+						count = 0
 
-		while count < (attempts + 1):
-		
-			s1 = sample(fives, 1)
-			s2 = ''.join(s1)
-			s2 = s2.split()
-		
-		
-			if word in s2:
-				success3 = True
-				wins += 1
-				sen3 = s1
-				break
-			else:
-				count += 1
-		
-			if count == attempts:
-				if word_is_random == True:
-					#print("Giving up on ", word, ", trying new word: ")
-					word = random.choice(open('20k.txt').readlines())[:-1]
-					#print(word, "\n")
-					count = 0
-				
+
+					else:
+						print("Giving up on", word)
+						sys.exit()
+
+		#Sentence 3
+
+		count = 0
+
+		while success3 == False:
+
+			while count < (attempts + 1):
+
+				s1 = sample(fives, 1)
+				s2 = ''.join(s1)
+				s2 = s2.split()
+
+
+				if word in s2:
+					success3 = True
+					wins += 1
+					sen3 = s1
+					break
 				else:
-					print("Giving up on", word)
-					sys.exit()
-				
-#Print results
-print("\nHaiku completed using seed word", word, "\n")
-print(sen1)
-print(sen2)
-print(sen3)
+					count += 1
+
+				if count == attempts:
+					if word_is_random == True:
+						#print("Giving up on ", word, ", trying new word: ")
+						word = random.choice(open('20k.txt').readlines())[:-1]
+						#print(word, "\n")
+						count = 0
+
+					else:
+						print("Giving up on", word)
+						sys.exit()
+
+	#Print results
+	print("\nHaiku completed using seed word", word, "\n")
+	print(sen1)
+	print(sen2)
+	print(sen3)
+
+if __name__ == "__main__":
+	main()
