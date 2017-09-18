@@ -34,7 +34,7 @@ sevens = []
 
 #print("Extracting sentences from text file")
 
-with open('20b.txt') as f:
+with open('25b.txt') as f:
 	sentences = split_into_sentences(f.read())
 
 for sentence in sentences:
@@ -170,6 +170,14 @@ while wins != 3:
 					print("Giving up on", word)
 					sys.exit()
 
+#Convert and clean sentences
+sen1 = ''.join(sen1)
+sen2 = ''.join(sen2)
+sen3 = ''.join(sen3)
+
+sen1.strip("[']")
+sen2.strip("[']")
+sen3.strip("[']")
 
 #Print results
 print("\nHaiku completed using seed word:", word, "after", trials, "trials\n")
