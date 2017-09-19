@@ -108,10 +108,10 @@ while sen1 == 'fail' or sen2 == 'fail' or sen3 == 'fail':
 	if word_is_random:
 		print("Moving to next word")	
 		cword = random.choice(open('20k.txt').readlines())[:-1]
-	else:
+	
+	if word_is_random == False and trials == 10000: #let's make sure it gives up eventually
 		print("Giving up on", cword)
 		sys.exit()
-
 
 
 #Convert and clean sentences
