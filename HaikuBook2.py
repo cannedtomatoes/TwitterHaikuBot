@@ -98,6 +98,11 @@ while sen1 == 'fail' or sen2 == 'fail' or sen3 == 'fail':
 	
 	trials += 1
 	
+	if sen1 == sen2 or sen1 == sen3 or sen2 == sen3:
+		sen1 = 'fail'
+		sen2 = 'fail'
+		sen3 = 'fail'
+	
 	prevword = cword
 	
 	if word_is_random:
@@ -114,9 +119,9 @@ sen1 = ''.join(sen1)
 sen2 = ''.join(sen2)
 sen3 = ''.join(sen3)
 
-sen1.strip("[']")
-sen2.strip("[']")
-sen3.strip("[']")
+sen1.strip("[']*")
+sen2.strip("[']*")
+sen3.strip("[']*")
 
 #Print results
 print("\nHaiku completed using seed word:", prevword, "after", trials, "trials\n")
