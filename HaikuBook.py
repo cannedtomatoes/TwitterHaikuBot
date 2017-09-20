@@ -58,9 +58,9 @@ else:
 fives = []
 sevens = []
 
-#print("Extracting sentences from text file")
+print("Extracting sentences and sorting sentences.")
 
-with open('25b.txt') as f:
+with open('40b.txt') as f:
 	sentences = split_into_sentences(f.read())
 
 for sentence in sentences:
@@ -70,8 +70,8 @@ for sentence in sentences:
 	if CountSyllables(sentence) == 7:
 		sevens.append(sentence)
 
-print("Number of sentences with five syllables: ", len(fives))
-print("Number of sentences with seven syllables: ", len(sevens))
+#print("Number of sentences with five syllables: ", len(fives))
+#print("Number of sentences with seven syllables: ", len(sevens))
 
 trials = 1
 count = 1
@@ -81,20 +81,22 @@ sen3 = 'fail'
 
 # Generate 3 sentences
 
+print("Generating Haiku.")
+
 while sen1 == 'fail' or sen2 == 'fail' or sen3 == 'fail':
 
 	
-	print("Attempting 5 syl with",cword)
+	#print("Attempting 5 syl with",cword)
 	sen1 = GenSentence(cword, fives, attempts)
-	print(sen1)
+	#print(sen1)
 	
-	print("Attempting 7 syl with",cword)
+	#print("Attempting 7 syl with",cword)
 	sen2 = GenSentence(cword, sevens, attempts)	
-	print(sen2)
+	#print(sen2)
 	
-	print("Attempting 5 syl with",cword)
+	#print("Attempting 5 syl with",cword)
 	sen3 = GenSentence(cword, fives, attempts)
-	print(sen3)
+	#print(sen3)
 	
 	trials += 1
 	
@@ -106,10 +108,10 @@ while sen1 == 'fail' or sen2 == 'fail' or sen3 == 'fail':
 	prevword = cword
 	
 	if word_is_random:
-		print("Moving to next word")	
+		#print("Moving to next word")	
 		cword = random.choice(open('20k.txt').readlines())[:-1]
 	
-	if word_is_random == False and trials == 10000: #let's make sure it gives up eventually
+	if word_is_random == False and trials == 1000: #let's make sure it gives up eventually
 		print("Giving up on", cword)
 		sys.exit()
 
@@ -119,13 +121,38 @@ sen1 = ''.join(sen1)
 sen2 = ''.join(sen2)
 sen3 = ''.join(sen3)
 
-sen1.strip("[']*")
-sen2.strip("[']*")
-sen3.strip("[']*")
+
+sen1.strip()
+sen1.lstrip("'")
+sen2.strip()
+sen2.lstrip("'")
+sen3.strip()
+sen3.lstrip("'")
+
+for ch in ['\"', '[', ']', '*', '_', '-']:
+	if ch in sen1:
+		 sen1 = sen1.replace(ch,"")
+		 
+for ch in ['\"', '[', ']', '*', '_', '-']:
+	if ch in sen2:
+		 sen2 = sen2.replace(ch,"")
+
+for ch in ['\"', '[', ']', '*', '_', '-']:
+	if ch in sen3:
+		 sen3 = sen3.replace(ch,"")
+
+sen1.capitalize()
+sen2.capitalize()
+sen3.capitalize()
+
+final = sen1 + '\n' + sen2 + '\n' + sen3
+final.capitalize()
 
 #Print results
 print("\nHaiku completed using seed word:", prevword, "after", trials, "trials\n")
-print(sen1)
-print(sen2)
-print(sen3)
+print(final)
+#print(sen1)
+#print(sen2)
+#print(sen3)
+print("\n")
 
