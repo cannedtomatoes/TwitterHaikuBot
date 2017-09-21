@@ -6,6 +6,8 @@ import random
 import syllables_en
 from sentences import split_into_sentences
 
+
+
 #Function to count syllables
 def CountSyllables(word, isName=True):
 	return syllables_en.count(word)
@@ -58,7 +60,7 @@ else:
 fives = []
 sevens = []
 
-print("Extracting sentences and sorting sentences.")
+print("Extracting and sorting sentences.")
 
 with open('40b.txt') as f:
 	sentences = split_into_sentences(f.read())
@@ -115,6 +117,7 @@ while sen1 == 'fail' or sen2 == 'fail' or sen3 == 'fail':
 		print("Giving up on", cword)
 		sys.exit()
 
+print("Sanitising text.")
 
 #Convert and clean sentences
 sen1 = ''.join(sen1)
@@ -122,12 +125,36 @@ sen2 = ''.join(sen2)
 sen3 = ''.join(sen3)
 
 
-sen1.strip()
-sen1.lstrip("'")
-sen2.strip()
-sen2.lstrip("'")
-sen3.strip()
-sen3.lstrip("'")
+#sen1.strip()
+#sen1.lstrip("'")
+#sen1.lstrip().translate({ord(c): None for c in '"[]*_-'})
+#sen2.strip()
+#sen2.lstrip("'")
+#sen2.lstrip().translate({ord(c): None for c in '"[]*_-'})
+#sen3.strip()
+#sen3.lstrip("'")
+#sen3.lstrip().translate({ord(c): None for c in '"[]*_-'})
+
+for i in range(len(sen1)):
+    if sen1[i].isalpha():        #True if its a letter
+    	pos = i                   	#first letter position
+    	break
+
+sen1 = sen1[pos:]
+
+for i in range(len(sen2)):
+    if sen2[i].isalpha():        #True if its a letter
+    	pos = i                   	#first letter position
+    	break
+
+sen2 = sen2[pos:]
+
+for i in range(len(sen3)):
+    if sen3[i].isalpha():        #True if its a letter
+    	pos = i                   	#first letter position
+    	break
+
+sen3 = sen3[pos:]
 
 for ch in ['\"', '[', ']', '*', '_', '-']:
 	if ch in sen1:
