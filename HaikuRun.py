@@ -1,6 +1,6 @@
 import sys, time, os
 
-sleep_t = 1800 #sleep time in seconds
+sleep_t = 28800 #sleep time in seconds (8 hours)
 
 while True:
 	remaining = sleep_t #reset time
@@ -11,6 +11,6 @@ while True:
 	#Count down seconds until next tweet
 	
 	while remaining != 0:
-		time.sleep(1)
+		time.sleep(60)
 		print(remaining, "seconds remaining until next tweet")
-		remaining -= 1
+		remaining -= 60
