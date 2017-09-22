@@ -5,8 +5,8 @@ from random import sample
 import random
 import syllables_en
 from sentences import split_into_sentences
-
-
+import time
+import argparse
 
 #Function to count syllables
 def CountSyllables(word, isName=True):
@@ -35,8 +35,11 @@ def GenSentence(rword, slist, att):
 		
 		count += 1
 		
-	
-		
+#Process arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('-r', '--random', help='Create Haiku based on random word', action="store_true")
+parser.add_argument('-s', '--specific', help='Create Haiku based on specific word', action="store")
+args = parser.parse_args()
 	
 
 # Start main program
@@ -44,15 +47,18 @@ def GenSentence(rword, slist, att):
 attempts = 4000 # attempts at finding sentence with given word
 
 print("Haiku generator\n")
-print("Input word or type 'r': ")
-user_input = input()
+#print("Input word or type 'r': ")
+#user_input = input()
 
-if user_input == 'r':
+start = time.time()
+
+if args.random:
 	cword = random.choice(open('20k.txt').readlines())[:-1]
 	word_is_random = True
 else:
-	cword = user_input
+	cword = args.specific
 	word_is_random = False
+	print("Specific word chosen:", args.specific)
 
 #print("Word selected: ", word, "\n")
 
@@ -124,17 +130,6 @@ sen1 = ''.join(sen1)
 sen2 = ''.join(sen2)
 sen3 = ''.join(sen3)
 
-
-#sen1.strip()
-#sen1.lstrip("'")
-#sen1.lstrip().translate({ord(c): None for c in '"[]*_-'})
-#sen2.strip()
-#sen2.lstrip("'")
-#sen2.lstrip().translate({ord(c): None for c in '"[]*_-'})
-#sen3.strip()
-#sen3.lstrip("'")
-#sen3.lstrip().translate({ord(c): None for c in '"[]*_-'})
-
 for i in range(len(sen1)):
     if sen1[i].isalpha():        #True if its a letter
     	pos = i                   	#first letter position
@@ -168,15 +163,20 @@ for ch in ['\"', '[', ']', '*', '_', '-']:
 	if ch in sen3:
 		 sen3 = sen3.replace(ch,"")
 
+sen1.strip()
+sen2.strip()
+sen3.strip()
+
 sen1.capitalize()
 sen2.capitalize()
 sen3.capitalize()
 
 final = sen1 + '\n' + sen2 + '\n' + sen3
-final.capitalize()
+
+end = time.time()
 
 #Print results
-print("\nHaiku completed using seed word:", prevword, "after", trials, "trials\n")
+print("\nHaiku completed using seed word:", prevword, "after", trials, "trials and", round(end-start), "seconds.\n")
 print(final)
 #print(sen1)
 #print(sen2)
