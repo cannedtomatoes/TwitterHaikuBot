@@ -166,10 +166,10 @@ final.capitalize()
 print("Posting:\n", final, "\n")
 
 #Define our constant variables, this is all the data we wrote down in the first part of the tutorial.
-CONSUMER_KEY = 	'wjcxNTp8xeyprkpDLg6sxi2k4'
-CONSUMER_SECRET = 'QFup2rdBBfvNqhDInul7KLcAOAR83QCTjN1HokuqFI3ZrQrGJu'
-ACCESS_KEY = '907828033503076354-4FGZZAi9rWwVnjIYPGUJcKmbObpVqba'
-ACCESS_SECRET = 'sYsxpiteUc12kyQnYbWNl91xvGk71m3jFdQVeWySfF2Uv'
+CONSUMER_KEY = 	
+CONSUMER_SECRET = 
+ACCESS_KEY = 
+ACCESS_SECRET = 
 
 api = Twython(CONSUMER_KEY,CONSUMER_SECRET,ACCESS_KEY,ACCESS_SECRET) 
 api.update_status(status = final)
